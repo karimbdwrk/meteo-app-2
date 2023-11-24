@@ -22,6 +22,7 @@ import GeoDataScreen from "./src/screens/GeoDataScreen";
 import MeteoScreen from "./src/screens/MeteoScreen";
 import MapScreen from "./src/screens/MapScreen";
 import QrCodeScreen from "./src/screens/QrCodeScreen";
+import ImageDetectionScreen from "./src/screens/ImageDetectionScreen";
 
 // import { styles } from "./src/styles/styles";
 
@@ -94,6 +95,10 @@ export default function App() {
 							}}
 						/>
 						<Stack.Screen name='QrCode' component={QrCodeScreen} />
+						<Stack.Screen
+							name='Image'
+							component={ImageDetectionScreen}
+						/>
 					</Stack.Navigator>
 					{/* <Tab.Navigator
 						initialRouteName='home'

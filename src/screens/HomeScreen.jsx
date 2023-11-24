@@ -10,6 +10,7 @@ import GeoDataScreen from "./GeoDataScreen";
 import MeteoScreen from "./MeteoScreen";
 import MapScreen from "./MapScreen";
 import QrCodeScreen from "./QrCodeScreen";
+import ImageDetectionScreen from "./ImageDetectionScreen";
 
 import { styles } from "../styles/styles";
 
@@ -46,6 +47,13 @@ const HomeScreen = ({ navigation }) => {
 					component={QrCodeScreen}
 					options={{
 						tabBarIcon: () => <Icon name='v-card' size={20} />,
+					}}
+				/>
+				<Tab.Screen
+					name='Image'
+					component={ImageDetectionScreen}
+					options={{
+						tabBarIcon: () => <Icon name='image' size={20} />,
 					}}
 				/>
 
