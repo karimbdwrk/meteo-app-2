@@ -20,6 +20,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import AboutScreen from "./src/screens/AboutScreen";
 import GeoDataScreen from "./src/screens/GeoDataScreen";
 import MeteoScreen from "./src/screens/MeteoScreen";
+import WeatherScreen from "./src/screens/WeatherScreen";
 import MapScreen from "./src/screens/MapScreen";
 import QrCodeScreen from "./src/screens/QrCodeScreen";
 import ImageDetectionScreen from "./src/screens/ImageDetectionScreen";
@@ -88,6 +89,17 @@ export default function App() {
 							component={MeteoScreen}
 							options={{
 								title: "Meteo page",
+								headerTintColor: "#FFF",
+								headerTitleStyle: {
+									fontWeight: "100",
+								},
+							}}
+						/>
+						<Stack.Screen
+							name='Weather'
+							component={WeatherScreen}
+							options={{
+								title: "Weather page",
 								headerTintColor: "#FFF",
 								headerTitleStyle: {
 									fontWeight: "100",

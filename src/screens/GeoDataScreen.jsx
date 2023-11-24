@@ -147,6 +147,7 @@ const GeoDataScreen = ({ navigation }) => {
 											{item.name}
 										</Text>
 									}
+									subtitle={item.country}
 									// subtitle='Card Subtitle'
 									// left={(props) => (
 									// 	<Avatar.Icon {...props} icon='folder' />
@@ -163,7 +164,7 @@ const GeoDataScreen = ({ navigation }) => {
 									<Button
 										mode='outlined'
 										onPress={() =>
-											navigation.navigate("Meteo", {
+											navigation.navigate("Weather", {
 												city: item.name,
 											})
 										}>
