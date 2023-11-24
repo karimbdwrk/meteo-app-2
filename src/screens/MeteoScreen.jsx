@@ -1,7 +1,9 @@
 import React from "react";
 import { View, FlatList } from "react-native";
-import { Button, Text } from "react-native-paper";
+import { Button, Text, ProgressBar } from "react-native-paper";
 import { useFocusEffect } from "@react-navigation/native";
+
+import Icon from "react-native-vector-icons/Ionicons";
 
 const MeteoScreen = ({ route, navigation }) => {
 	const [loading, setLoading] = React.useState(false);
@@ -39,6 +41,18 @@ const MeteoScreen = ({ route, navigation }) => {
 		}
 	};
 
+	const IconWeather = ({ pct }) => {
+		if (pct < 25) {
+			return <Icon name='sunny' size={48} />;
+		} else if (pct < 50 && pct >= 25) {
+			return <Icon name='partly-sunny' size={48} />;
+		} else if (pct < 75 && pct >= 50) {
+			return <Icon name='cloudy' size={48} />;
+		} else if (pct <= 100 && pct >= 75) {
+			return <Icon name='rainy' size={48} />;
+		}
+	};
+
 	return (
 		<View>
 			{/* <Text style={{ fontSize: 24 }}>Meteo de {city}</Text> */}
@@ -47,9 +61,19 @@ const MeteoScreen = ({ route, navigation }) => {
 			{loading ? (
 				<Text>Loading ...</Text>
 			) : (
-				<View>
+				<View style={{ padding: 15 }}>
 					{data && (
-						<Text variant='headlineMedium'>{data.temp + "°C"}</Text>
+						<>
+							<IconWeather pct={data.cloud_pct} />
+							<Text variant='headlineMedium'>
+								{data.temp + "°C"}
+							</Text>
+							<Text>Humidité</Text>
+							<ProgressBar
+								progress={data.humidity / 100}
+								color={"#000"}
+							/>
+						</>
 					)}
 					<Button onPress={() => navigation.goBack()}>Retour</Button>
 				</View>
