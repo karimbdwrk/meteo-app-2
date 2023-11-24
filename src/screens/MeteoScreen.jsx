@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, FlatList } from "react-native";
-import { Button } from "react-native-paper";
+import { View, FlatList } from "react-native";
+import { Button, Text } from "react-native-paper";
 import { useFocusEffect } from "@react-navigation/native";
 
 const MeteoScreen = ({ route, navigation }) => {
@@ -41,9 +41,21 @@ const MeteoScreen = ({ route, navigation }) => {
 
 	return (
 		<View>
-			<Text style={{ fontSize: 24 }}>Meteo de {city}</Text>
-			{data && <Text>{data.temp}</Text>}
+			{/* <Text style={{ fontSize: 24 }}>Meteo de {city}</Text> */}
+			<Text variant='displayMedium'>Meteo de {city}</Text>
+
+			{loading ? (
+				<Text>Loading ...</Text>
+			) : (
+				<View>
+					{data && (
+						<Text variant='headlineMedium'>{data.temp + "°C"}</Text>
+					)}
+					<Button onPress={() => navigation.goBack()}>Retour</Button>
+				</View>
+			)}
 		</View>
 	);
 };
+
 export default MeteoScreen;

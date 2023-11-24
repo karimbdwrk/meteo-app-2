@@ -31,19 +31,19 @@ export default function App() {
 
 	const headerConfig = {
 		headerStyle: {
-			backgroundColor: "#F4511E",
+			backgroundColor: "#FFF",
 		},
 	};
 
 	const Logo = () => (
 		<Image
-			style={{ width: 75, height: 30 }}
-			source={require("./assets/logo-nike.png")}
+			style={{ width: 30, height: 30 }}
+			source={require("./assets/icone-meteo-noir.png")}
 		/>
 	);
 
 	return (
-		<View style={{ flex: 1, backgroundColor: "pink" }}>
+		<View style={{ flex: 1 }}>
 			<StatusBar style='auto' />
 			<SafeAreaView
 				style={[

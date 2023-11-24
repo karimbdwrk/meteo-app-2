@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View, Image } from "react-native";
-import { Button } from "react-native-paper";
+import { Button, BottomNavigation } from "react-native-paper";
 import Icon from "react-native-vector-icons/Entypo";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -24,8 +24,8 @@ const HomeScreen = ({ navigation }) => {
 				screenOptions={{
 					tabBarActiveTintColor: "#000",
 					tabBarInactiveTintColor: "#BBB",
-					tabBarActiveBackgroundColor: "pink",
-					tabBarInactiveBackgroundColor: "yellow",
+					tabBarActiveBackgroundColor: "#E7E7E7",
+					tabBarInactiveBackgroundColor: "#FFF",
 				}}>
 				<Tab.Screen
 					name='GeoData'

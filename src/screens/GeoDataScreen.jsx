@@ -1,14 +1,7 @@
 import React from "react";
-import {
-	Text,
-	View,
-	Image,
-	TextInput,
-	StyleSheet,
-	FlatList,
-} from "react-native";
+import { Text, View, Image, StyleSheet, FlatList } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Button } from "react-native-paper";
+import { Button, TextInput, Card } from "react-native-paper";
 
 import Title from "../components/Title";
 
@@ -93,6 +86,28 @@ const GeoDataScreen = ({ navigation }) => {
 		}
 	};
 
+	const fetchWeather = async () => {
+		try {
+			setLoading(true);
+			const response = await fetch(
+				`https://api.api-ninjas.com/v1/weather?city=${city}`,
+				{
+					headers: {
+						"X-Api-Key": API_KEY,
+						contentType: "application/json",
+					},
+				}
+			);
+			const dataJson = await response.json();
+			setData(dataJson);
+			setLoading(false);
+			console.log("datajson : ", dataJson);
+		} catch (error) {
+			console.error(error);
+			setLoading(false);
+		}
+	};
+
 	const handleSubmit = () => {
 		if (city && !cities) {
 			fetchData();
@@ -116,42 +131,70 @@ const GeoDataScreen = ({ navigation }) => {
 
 	return (
 		<View style={styles.screen}>
-			<Title content='GeoData Screen' couleur='red' size={32} />
-			<View style={{ flex: 4 }}>
+			{/* <Title content='GeoData Screen' couleur='red' size={32} /> */}
+			<View style={{ flex: 4, width: "100%", padding: 15 }}>
 				<FlatList
 					data={cities}
 					keyExtractor={() => Math.random()}
 					renderItem={({ item }) => (
-						<View style={styles2.card}>
-							<Text style={{ color: "#FFF", fontSize: 24 }}>
-								{item.name}
-							</Text>
-							<Button
-								mode='contained'
-								onPress={() =>
-									navigation.navigate("Meteo", {
-										city: item.name,
-									})
-								}>
-								Voir Meteo
-							</Button>
-							<Button
-								mode='contained'
-								onPress={() => handleDelete(item.name)}>
-								X
-							</Button>
-						</View>
+						<>
+							<Card
+								mode='outlined'
+								style={{ width: "100%", marginBottom: 10 }}>
+								<Card.Title
+									title={
+										<Text style={{ fontSize: 24 }}>
+											{item.name}
+										</Text>
+									}
+									// subtitle='Card Subtitle'
+									// left={(props) => (
+									// 	<Avatar.Icon {...props} icon='folder' />
+									// )}
+									// right={(props) => (
+									// 	<IconButton
+									// 		{...props}
+									// 		icon='dots-vertical'
+									// 		onPress={() => {}}
+									// 	/>
+									// )}
+								/>
+								<Card.Actions>
+									<Button
+										mode='outlined'
+										onPress={() =>
+											navigation.navigate("Meteo", {
+												city: item.name,
+											})
+										}>
+										Voir Meteo
+									</Button>
+									<Button
+										mode='contained'
+										onPress={() => handleDelete(item.name)}>
+										X
+									</Button>
+								</Card.Actions>
+							</Card>
+						</>
 					)}
 				/>
 				{loading && <Text style={{ color: "#FFF" }}>Loading ...</Text>}
 			</View>
 			<View style={{ flex: 1, width: "100%", padding: 15 }}>
 				{error && <Text style={styles2.error}>{error}</Text>}
-				<TextInput
+				{/* <TextInput
 					style={styles2.input}
 					placeholder='city'
 					onChangeText={setCity}
 					value={city}
+				/> */}
+				<TextInput
+					mode='outlined'
+					label='city'
+					value={city}
+					onChangeText={setCity}
+					style={{ marginBottom: 10 }}
 				/>
 				<Button mode='contained' onPress={handleSubmit}>
 					Send

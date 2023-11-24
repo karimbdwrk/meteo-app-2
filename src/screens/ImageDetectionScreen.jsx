@@ -1,75 +1,86 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Camera } from "expo-camera";
+// import { readFile } from "react-native-fs";
 
 // const fs = require("fs");
 
 export default function ImageDetectionScreen() {
 	// const FormData = require("form-data");
-	const [loading, setLoading] = React.useState(false);
-	const [hasCameraPermission, setHasCameraPermission] = useState(null);
-	const [camera, setCamera] = useState(null);
-	const [image, setImage] = useState(null);
-	const [type, setType] = useState(Camera.Constants.Type.back);
+	// const [loading, setLoading] = React.useState(false);
+	// const [hasCameraPermission, setHasCameraPermission] = useState(null);
+	// const [camera, setCamera] = useState(null);
+	// const [image, setImage] = useState(null);
+	// const [type, setType] = useState(Camera.Constants.Type.back);
 
-	const API_KEY = "1764df9331msh5e512dad9f53d86p145b92jsn4596e24bf83f";
+	// const API_KEY = "1764df9331msh5e512dad9f53d86p145b92jsn4596e24bf83f";
 
-	useEffect(() => {
-		(async () => {
-			const cameraStatus = await Camera.requestCameraPermissionsAsync();
-			setHasCameraPermission(cameraStatus.status === "granted");
-		})();
-	}, []);
+	// const loadImageBase64 = async (image) => {
+	// 	try {
+	// 		const base64Data = await readFile(capturedImageURI, "base64");
+	// 		return "data:image/jpeg;base64," + base64Data;
+	// 	} catch (error) {
+	// 		console.error("Error converting image to base64:", error);
+	// 	}
+	// };
 
-	useEffect(() => {
-		if (image) fetchImg();
-	}, [image]);
+	// useEffect(() => {
+	// 	(async () => {
+	// 		const cameraStatus = await Camera.requestCameraPermissionsAsync();
+	// 		setHasCameraPermission(cameraStatus.status === "granted");
+	// 	})();
+	// }, []);
 
-	const fetchImg = async () => {
-		try {
-			setLoading(true);
-			console.log(image);
+	// useEffect(() => {
+	// 	if (image) fetchImg();
+	// }, [image]);
 
-			const data = new FormData();
-			data.append("model", "detect");
-			data.append("image", image);
+	// const fetchImg = async () => {
+	// 	const base64Image = await loadImageBase64(image);
+	// 	try {
+	// 		setLoading(true);
+	// 		console.log(image);
 
-			const response = await fetch(
-				"https://object-detection1.p.rapidapi.com/detect",
-				{
-					method: "POST",
-					headers: {
-						"X-RapidAPI-Key":
-							"bc70aef057msh4ed271859f0bdd7p11261fjsn55b3a62921ee",
-						"X-RapidAPI-Host": "object-detection1.p.rapidapi.com",
-						// contentType: "multipart/form-data",
-					},
-					body: data,
-				}
-			);
-			const dataJson = await response.json();
-			// setData(dataJson);
-			setLoading(false);
-			console.log("datajson : ", dataJson);
-		} catch (error) {
-			console.error(error);
-			setLoading(false);
-		}
-	};
+	// 		const data = new FormData();
+	// 		data.append("model", "detect");
+	// 		data.append("image", base64Image);
 
-	const takePicture = async () => {
-		if (camera) {
-			const data = await camera.takePictureAsync(null);
-			setImage(data.uri);
-		}
-	};
+	// 		const response = await fetch(
+	// 			"https://object-detection1.p.rapidapi.com/detect",
+	// 			{
+	// 				method: "POST",
+	// 				headers: {
+	// 					"X-RapidAPI-Key":
+	// 						"bc70aef057msh4ed271859f0bdd7p11261fjsn55b3a62921ee",
+	// 					"X-RapidAPI-Host": "object-detection1.p.rapidapi.com",
+	// 					// contentType: "multipart/form-data",
+	// 				},
+	// 				body: data,
+	// 			}
+	// 		);
+	// 		const dataJson = await response.json();
+	// 		// setData(dataJson);
+	// 		setLoading(false);
+	// 		console.log("datajson : ", dataJson);
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 		setLoading(false);
+	// 	}
+	// };
 
-	if (hasCameraPermission === false) {
-		return <Text>No access to camera</Text>;
-	}
+	// const takePicture = async () => {
+	// 	if (camera) {
+	// 		const data = await camera.takePictureAsync(null);
+	// 		setImage(data.uri);
+	// 	}
+	// };
+
+	// if (hasCameraPermission === false) {
+	// 	return <Text>No access to camera</Text>;
+	// }
 	return (
 		<View style={{ flex: 1 }}>
-			<View style={styles.cameraContainer}>
+			{/* <View style={styles.cameraContainer}>
 				<Camera
 					ref={(ref) => setCamera(ref)}
 					style={styles.fixedRatio}
@@ -87,7 +98,7 @@ export default function ImageDetectionScreen() {
 					);
 				}}></Button>
 			<Button title='Take Picture' onPress={() => takePicture()} />
-			{image && <Image source={{ uri: image }} style={{ flex: 1 }} />}
+			{image && <Image source={{ uri: image }} style={{ flex: 1 }} />} */}
 		</View>
 	);
 }
