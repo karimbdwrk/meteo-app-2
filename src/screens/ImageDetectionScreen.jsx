@@ -1,7 +1,6 @@
 import React from "react";
 import { Text, View, TextInput } from "react-native";
 import { Button } from "react-native-paper";
-import QRCode from "react-native-qrcode-svg";
 
 import { styles } from "../styles/styles";
 
